@@ -4,10 +4,17 @@ import styles from '../styles/Home.module.css'
 export default function Home() {
   return (
     <div className={styles.container}>
-      <h1>NextJS</h1>
+      <Head>
+        <title>Create Next App</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <h1> Hola </h1>
 
       <footer className={styles.footer}>
-          Saúl Franco{' '}     
+     
+          Saúl Franco
+
       </footer>
     </div>
   )
