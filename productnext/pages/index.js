@@ -1,21 +1,17 @@
-import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import styled from '@emotion/styled';
+import Layout from '../components/layout/Layout';
+
+const Heading = styled.h1`
+  color :red ;
+`;
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <h1> Hola </h1>
-
-      <footer className={styles.footer}>
-     
-          Saúl Franco
-
-      </footer>
+    <div>
+      
+      <Layout/>
+        
     </div>
   )
 }
