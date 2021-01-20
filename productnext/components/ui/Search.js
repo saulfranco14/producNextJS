@@ -1,14 +1,20 @@
 import React, { Fragment } from 'react';
+import {
+    InputText,
+    InputSubmit,
+    FormSearch
+}
+from '../styleComponent/style.styles';
 
-const Searcg = () => {
+const Search = () => {
     return ( 
         <Fragment>
-            <form>
-                <input type="text" />
-                <button type="submit">Buscar</button>
-            </form>
+            <FormSearch>
+                <InputText type="text" placeholder="Buscar ramos o flores" />
+                <InputSubmit type="submit">Buscar</InputSubmit>
+            </FormSearch>
         </Fragment>
      );
 }
  
-export default Searcg;
+export default Search;

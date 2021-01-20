@@ -1,15 +1,16 @@
-import React, { Fragment } from 'react';
-import Link from 'next/link';
+import React, { Fragment }  from 'react';
+import Link                 from 'next/link';
+import { Navegation }       from '../styleComponent/style.styles';
 
 
 const Nav = () => {
     return ( 
         <Fragment>
-            <nav>
+            <Navegation>
                 <Link href="/">Inicio</Link>
                 <Link href="/">Populares</Link>
                 <Link href="/">Nuevo producto</Link>
-            </nav>
+            </Navegation>
         </Fragment>
      );
 }

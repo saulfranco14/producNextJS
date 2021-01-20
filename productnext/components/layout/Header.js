@@ -3,32 +3,68 @@ import Link from 'next/link';
 import { css } from '@emotion/react';
 import Search from '../ui/Search';
 import Nav from './Nav';
-import { ContenedorHeader }  from '../styleComponent/style.styles';
+import { 
+    ContenedorHeader,
+    Logo,
+    Boton,
+    DivCenter,
+    NameP
+ }  
+from '../styleComponent/style.styles';
 
 
 const Header = () => {
+
+
+    const user = true;
+
     return ( 
         <Fragment>
             <header
                 css={css`
                     border-bottom : 2px solid var(--gris3);
-                    padding: 1rem 0;
                 `}
             >
                 <ContenedorHeader>
-                    <div>
-                        <p>Flores</p>
+                    <DivCenter>
+                        <Link href="/">
+                            <Logo>
+                                <img width="110" height="130" src="../static/img/logo-2.jpg"/>
+                            </Logo>
+                        </Link>
                         <Search></Search>
 
                         <Nav></Nav>
-                    </div>
-                    <div>
-                        <p> Hola: Saúl Franco</p>
-                        <button type="button">Cerrar Sesión</button>
-
-                        <Link href="/">Login</Link>
-                        <Link href="/">Crear cuenta</Link>
-                    </div>
+                    </DivCenter>
+                    <DivCenter>
+                       {
+                           user ? (
+                                <Fragment>
+                                    <NameP> Hola: Saúl Franco</NameP>
+                                    <Boton
+                                        bgColor={true}
+                                    >
+                                        Cerrar Sesión
+                                    </Boton>
+                                </Fragment>
+                           ):(
+                                <Fragment>
+                                    <Link href="/">
+                                        <Boton
+                                            bgColor={true}
+                                        >
+                                            Login
+                                        </Boton>
+                                    </Link>
+                                    <Link href="/">
+                                        <Boton>
+                                            Crear cuenta
+                                        </Boton>
+                                    </Link>
+                                </Fragment>
+                           )
+                       }
+                    </DivCenter>
                 </ContenedorHeader>
             </header>
         </Fragment>
