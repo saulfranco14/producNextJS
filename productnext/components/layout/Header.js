@@ -16,7 +16,7 @@ from '../styleComponent/style.styles';
 const Header = () => {
 
 
-    const user = true;
+    const user = false;
 
     return ( 
         <Fragment>
@@ -49,14 +49,14 @@ const Header = () => {
                                 </Fragment>
                            ):(
                                 <Fragment>
-                                    <Link href="/">
+                                    <Link href="/login">
                                         <Boton
                                             bgColor={true}
                                         >
                                             Login
                                         </Boton>
                                     </Link>
-                                    <Link href="/">
+                                    <Link href="/createAccount">
                                         <Boton>
                                             Crear cuenta
                                         </Boton>

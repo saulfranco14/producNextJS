@@ -8,8 +8,8 @@ const Nav = () => {
         <Fragment>
             <Navegation>
                 <Link href="/">Inicio</Link>
-                <Link href="/">Populares</Link>
-                <Link href="/">Nuevo producto</Link>
+                <Link href="/populares">Populares</Link>
+                <Link href="/newProduct">Nuevo producto</Link>
             </Navegation>
         </Fragment>
      );
