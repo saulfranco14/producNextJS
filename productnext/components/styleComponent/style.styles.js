@@ -79,7 +79,7 @@ export const Boton = styled.a`
     margin-right : 1rem;
     cursor:pointer;
 
-    background-color: ${ props => props.bgColor ? '#c30f0f' : 'white' };
+    background-color: ${ props => props.bgColor ? '#29bf89' : 'white' };
     color           : ${ props => props.bgColor ? 'white'   : '#000'};
 
     &:last-of-type{

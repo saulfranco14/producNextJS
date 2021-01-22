@@ -15,6 +15,8 @@ const Layout = ( props ) => {
                         --gris3: #e1e1e1;
                         --naranja: #DA552F;
                         --logo : #c30f0f;
+                        --azul: #4386d6;
+                        --verde: #29bf89;
                     }
                     html {
                         font-size: 62.5%;
@@ -57,6 +59,9 @@ const Layout = ( props ) => {
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossOrigin="anonymous" />
                 <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700|Roboto+Slab:400,700&display=swap" rel="stylesheet" />
                 <link href="/static/css/app.css" rel="stylesheet" />
+                <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+                <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>
+
             </Head>
             <Header/>
             <main>
