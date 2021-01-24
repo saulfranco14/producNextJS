@@ -1,5 +1,9 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import Layout from '../components/layout/Layout';
+import useValidate from '../hooks/UseValidation.component';
+import validateCreateAccount from '../validations/validateCreateAccount';
+import Router from 'next/router';
+import firebase from '../firebase';
 import {
     Formulario,
     DivForm,
@@ -7,8 +11,7 @@ import {
     H1Text,
     ErrorForm
 } from '../components/styleComponent/forms.styles';
-import useValidate from '../hooks/UseValidation.component';
-import validateCreateAccount from '../validations/validateCreateAccount';
+
 
 const state_inicial ={
     nombre      : "",
@@ -18,11 +21,7 @@ const state_inicial ={
 
 const CreateAccount = () => {
 
-
-    function createAccount(){
-        console.log("Creando cuenta...");
-    }
-
+    // Hook validate create/form
     const { validate,
             error,
             handleSubmit,
@@ -30,7 +29,24 @@ const CreateAccount = () => {
             handleBlur
         } = useValidate(state_inicial, validateCreateAccount, createAccount );
 
+    // destructuring validate
     const { nombre,email,password } = validate;
+
+    //View Error
+    const [ errorFirebase, setErrorFirebase ] = useState(false);
+
+    // create User
+    async function createAccount(){
+        try {
+            await firebase.register(nombre, email, password);  
+            Router.push('/');  
+        } catch (error) {
+            setErrorFirebase("Usuario o contraseña incorrecto");
+        }
+       
+    }
+
+   
 
     return ( 
         <Fragment>
@@ -82,10 +98,12 @@ const CreateAccount = () => {
                             />
                     </DivForm>
                     { error.password && <ErrorForm>{ error.password } </ErrorForm>}
+                    { errorFirebase && <ErrorForm>{ errorFirebase } </ErrorForm>}
                     <InputSubmit 
                         type="submit"
                         value="Crear cuenta"
                     />
+                    
                </Formulario>
             </Layout>
         </Fragment>
