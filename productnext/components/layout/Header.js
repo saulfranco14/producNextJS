@@ -1,8 +1,9 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import Link from 'next/link';
 import { css } from '@emotion/react';
 import Search from '../ui/Search';
 import Nav from './Nav';
+import { FirebaseContext } from '../../firebase'; 
 import { 
     ContenedorHeader,
     Logo,
@@ -16,7 +17,7 @@ from '../styleComponent/style.styles';
 const Header = () => {
 
 
-    const user = false;
+    const { user, firebase } = useContext(FirebaseContext);
 
     return ( 
         <Fragment>
@@ -40,9 +41,10 @@ const Header = () => {
                        {
                            user ? (
                                 <Fragment>
-                                    <NameP> Hola: Saúl Franco</NameP>
+                                    <NameP> Hola: {user.displayName}</NameP>
                                     <Boton
                                         bgColor={true}
+                                        onClick={ ()=> firebase.logout() }
                                     >
                                         Cerrar Sesión
                                     </Boton>
