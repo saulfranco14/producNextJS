@@ -1,9 +1,10 @@
-import React, { Fragment, useState } from 'react';
-import Layout from '../components/layout/Layout';
-import useValidate from '../hooks/UseValidation.component';
-import validateCreateProduct from '../validations/validateCreateProduct';
-import Router from 'next/router';
-import firebase from '../firebase';
+import React, { Fragment, useState, useContext }    from 'react';
+import Layout                                       from '../components/layout/Layout';
+import useValidate                                  from '../hooks/UseValidation.component';
+import validateCreateProduct                        from '../validations/validateCreateProduct';
+import { ProductNew }                               from './product/createProduct';
+import Router, { useRouter }                        from 'next/router';
+import {FirebaseContext}                            from '../firebase';
 import {
     Formulario,
     DivForm,
@@ -11,7 +12,8 @@ import {
     H1Text,
     ErrorForm,
     TextAreaForm
-} from '../components/styleComponent/forms.styles';
+}                                                   from '../components/styleComponent/forms.styles';
+import { route }                                    from 'next/dist/next-server/server/router';
 
 
 const state_inicial ={
@@ -23,8 +25,6 @@ const state_inicial ={
     urlArreglo          : "",
 }
 
-
-
 const NewProduct = () => {
 
     // Hook validate create/form
@@ -33,7 +33,7 @@ const NewProduct = () => {
             handleSubmit,
             handleChange,
             handleBlur
-        } = useValidate(state_inicial, validateCreateProduct, createAccount );
+        } = useValidate(state_inicial, validateCreateProduct, createProduct );
 
     // destructuring validate
     const { 
@@ -44,13 +44,33 @@ const NewProduct = () => {
         descuentoArreglo,
         urlArreglo
     } = validate;
+   
     //View Error
     const [ errorFirebase, setErrorFirebase ] = useState(false);
 
+    //useRouter
+    const router = useRouter();
+
+    //useContext
+    const { user, firebase } = useContext(FirebaseContext);
+
     //Create Product
-    async function createAccount(){
-       
-       
+    async function createProduct(){
+        if(!user) return router.push('/login');
+        // product
+         // New product
+        const ProductNew = {
+            created_at: Date.now(),
+            nombreArreglo,
+            precioArreglo,
+            etiquetaArreglo, 
+            descripcionArreglo, 
+            descuentoArreglo,
+            urlArreglo,
+            votos: 0,
+            comentarios: []
+        }
+        firebase.db.collection('productoArreglo').add(ProductNew);
     }
 
    

@@ -1,6 +1,7 @@
 import app from 'firebase/app';
 import 'firebase/analytics';
 import 'firebase/auth';
+import 'firebase/firestore';
 import firebaseConfig from './config';
 
 class Firebase {
@@ -10,7 +11,8 @@ class Firebase {
             app.initializeApp(firebaseConfig);
             app.analytics();
         }
-        this.auth = app.auth();
+        this.auth   = app.auth();
+        this.db     = app.firestore();
     }
 
     //Register User

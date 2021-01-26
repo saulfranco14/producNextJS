@@ -11,8 +11,6 @@ export default function validateCreateProduct( valores ) {
     }else if( !/^(ftp|http|https):\/\/[^ "]+$/.test(valores.urlArreglo) ) {
         errores.urlArreglo = "URL mal formateada o no válida"
     }
-    
-    
 
     return errores;
 
