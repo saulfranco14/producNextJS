@@ -79,6 +79,7 @@ const NewProduct = () => {
             comentarios: []
         }
         await firebase.db.collection('productoArreglo').add(ProductNew);
+        Router.push('/');  
     }
 
     // UploadImage
