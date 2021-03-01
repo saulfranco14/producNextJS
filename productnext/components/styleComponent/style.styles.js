@@ -2,8 +2,9 @@ import styled from '@emotion/styled';
 
 
 export const ContenedorHeader = styled.div`
-    max-width: 1200px;
+    max-width: auto;
     width : 95%;
+    height: 115px;
     margin: 0 auto;
     @media (min-width: 798px){
         display: flex;
@@ -43,6 +44,7 @@ export const InputText = styled.input`
 export const InputSubmit = styled.button`
     height: 3rem;
     width: 3rem;
+    font-size: 1.5rem;
     display: block;
     background-size : 4rem;
     background-image: url('/static/img/buscar.png');
@@ -60,7 +62,7 @@ export const Navegation = styled.nav`
     padding-left : 2rem;
 
     a{
-        font-size: 1.8rem;
+        font-size: 1.5rem;
         margin-left : 2rem;
         color : var(--gris2);
         font-family: 'PT Sans', sans-serif;
@@ -73,6 +75,7 @@ export const Navegation = styled.nav`
 
 export const Boton = styled.a`
     font-weight : 700;
+    font-size: 1.5rem;
     text-transform : uppercase;
     border: 1px solid #d1d1d1;
     padding : .8rem 2rem;
@@ -85,4 +88,30 @@ export const Boton = styled.a`
     &:last-of-type{
         margin-right:0;
     }
+`
+
+export const BotonVotar = styled.a`
+
+    font-weight : 700;
+    font-size: 1.5rem;
+    text-transform : uppercase;
+    text-align: center;
+    border: 1px solid #d1d1d1;
+    padding : .8rem 2rem;
+    margin-right : 1rem;
+    display: block;
+    cursor:pointer;
+
+
+    background-color: ${ props => props.bgColor ? '#29bf89' : 'white' };
+    color           : ${ props => props.bgColor ? 'white'   : '#000'};
+
+    &:last-of-type{
+        margin-right:0;
+    }
+
+`
+
+export const LikeSidebar = styled.p`
+    text-align: center;
 `

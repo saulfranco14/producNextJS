@@ -55,7 +55,7 @@ const Header = () => {
                                         <Boton
                                             bgColor={true}
                                         >
-                                            Login
+                                            Iniciar Sesión
                                         </Boton>
                                     </Link>
                                     <Link href="/createAccount">

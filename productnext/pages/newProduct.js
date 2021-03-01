@@ -1,8 +1,10 @@
 import React, { Fragment, useState, useContext }    from 'react';
+import Swal                                         from 'sweetalert2';
 import FileUploader                                 from 'react-firebase-file-uploader';
 import Layout                                       from '../components/layout/Layout';
 import useValidate                                  from '../hooks/UseValidation.component';
 import validateCreateProduct                        from '../validations/validateCreateProduct';
+
 import { ProductNew }                               from './product/createProduct';
 import Router, { useRouter }                        from 'next/router';
 import {FirebaseContext}                            from '../firebase';
@@ -23,11 +25,11 @@ const state_inicial ={
     etiquetaArreglo     : "",
     descripcionArreglo  : "",
     descuentoArreglo    : "",
-    urlArreglo          : "",
 }
 
 const NewProduct = () => {
 
+    
     //State image 
     const [ image, setImage ]                   = useState('');
     const [ uploadImage, setUploadImage ]       = useState(false);
@@ -48,8 +50,7 @@ const NewProduct = () => {
         precioArreglo,
         etiquetaArreglo, 
         descripcionArreglo, 
-        descuentoArreglo,
-        urlArreglo
+        descuentoArreglo
     } = validate;
    
     //View Error
@@ -73,12 +74,28 @@ const NewProduct = () => {
             etiquetaArreglo, 
             descripcionArreglo, 
             descuentoArreglo,
-            urlArreglo,
             urlImage,
             votos: 0,
-            comentarios: []
+            comentarios: [],
+            userId :{
+                id: user.uid,
+                nombreUsuario : user.displayName
+            },
+            userVotes : [{
+                users: {
+                    
+                }
+            }]
         }
         await firebase.db.collection('productoArreglo').add(ProductNew);
+        Swal.fire({
+            icon: 'success',
+            title: 'Se ha registrado correctamente el arreglo',
+            showConfirmButton: false,
+            width: '50rem',
+            timerProgressBar: true,
+            timer: 3000
+        });
         Router.push('/');  
     }
 
@@ -114,7 +131,20 @@ const NewProduct = () => {
         .getDownloadURL()
         .then( (urlImage) => { 
             console.log(urlImage); 
-            setUrlImage(urlImage) 
+            setUrlImage(urlImage);
+            Swal.fire({
+                icon: 'success',
+                title: 'Se ha registrado correctamente la imagen',
+                width: '50rem',
+            });
+        }).catch( function (){
+            console.log(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                width: '50rem',
+                text: 'Hubo un errro al subir la imagen, intente con otra imagen.'
+            })
         });
     }
 
@@ -207,21 +237,6 @@ const NewProduct = () => {
                             />
                         </DivForm>
                         { error.descuentoArreglo && <ErrorForm>{ error.descuentoArreglo } </ErrorForm>}
-
-                        <DivForm>
-                            <label htmlFor="urlArreglo">URL del Arreglo {" "}</label>
-                            <input
-                                id              ="urlArreglo"
-                                type            ="url"
-                                name            ="urlArreglo"
-                                placeholder     ="Ingresa la url del arreglo"
-                                value           ={urlArreglo}
-                                onChange        ={handleChange}
-                                onBlur          ={handleBlur}
-                                autoComplete    ="off"
-                            />
-                        </DivForm>
-                        { error.urlArreglo && <ErrorForm>{ error.urlArreglo } </ErrorForm>}
 
                         <DivForm>
                             <label htmlFor="imagenPrincipal">Imagen principal {" "}</label>

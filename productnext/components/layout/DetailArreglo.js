@@ -7,14 +7,22 @@ import {
     Vote,
     TitleArreglo,
     DescriptionArreglo,
-    EtiquetaArreglo
+    EtiquetaArreglo,
+    ImageDiv,
+    DivVote,
+    DivPorcent,
+    Boton,
+    BotonDiv,
+    DivNumberVotos
 }   from '../styleComponent/detailArreglo.styles';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import { es } from 'date-fns/locale';
+import Link from 'next/link';
 
 const DetailArreglo = ({ arreglo }) => {
 
     const { 
+            id,
             created_at,
             descripcionArreglo,
             descuentoArreglo, 
@@ -31,11 +39,17 @@ const DetailArreglo = ({ arreglo }) => {
         <Fragment>
             <ArregloLI>
                 <Description>
-                    <div>
-                        <Imagen src={urlImage} />
-                    </div>
-                    <div>
-                        <TitleArreglo>{nombreArreglo}</TitleArreglo>
+                    <Link href="/product/[id]" as={`/product/${id}`}>
+                        <ImageDiv>
+                            <Imagen src={urlImage} />
+                        </ImageDiv>
+                    </Link>
+                    <DivPorcent>
+                        <Link href="/product/[id]" as={`/product/${id}`}>
+                            <div>
+                                <TitleArreglo>{nombreArreglo}</TitleArreglo>
+                            </div>
+                        </Link>
                         <EtiquetaArreglo>{etiquetaArreglo}</EtiquetaArreglo>
                         <DescriptionArreglo>{descripcionArreglo}</DescriptionArreglo>
                         <Commentary>
@@ -45,12 +59,25 @@ const DetailArreglo = ({ arreglo }) => {
                             </div>
                         </Commentary>
                         <p>Publicado hace: { formatDistanceToNow( new Date(created_at), {locale:es} ) }</p>
-                    </div>
+                    </DivPorcent>
                 </Description>
+               
                 <Vote>
-                    <div> &#9650;</div>
-                    <p>{votos}</p>
+                    <div>${precioArreglo} mxn</div>
+                    <DivVote>
+                        <div> 👍 </div>
+                        <DivNumberVotos>{votos}</DivNumberVotos>
+                    </DivVote>
+                    <BotonDiv>
+                    <Boton>
+                        Comprar
+                    </Boton>
+                    <Boton>
+                        Añadir al carrito
+                    </Boton>
+                </BotonDiv>
                 </Vote>
+                
             </ArregloLI>
         </Fragment>
      );

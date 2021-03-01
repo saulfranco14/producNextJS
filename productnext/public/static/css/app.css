@@ -1,5 +1,6 @@
 .listado-productos {
-    background-color: #f3f3f3;
+    background-color: #ea5394;
+    /* background-color: #e83e43; */
 }
 .contenedor {
     max-width: 1200px;
@@ -9,4 +10,21 @@
 }
 .bg-white {
     background-color: #FFF;
+}
+
+/* Modal Sweet Alert */
+.swal-wide{
+ width: 500px !important;
+}
+
+.swal2-title {
+    font-size: 32px !important;
+}
+
+.swal2-content {
+    font-size: 26px !important;
+}
+
+.swal2-styled.swal2-confirm {
+    font-size: 2.0625em !important;
 }

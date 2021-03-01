@@ -14,6 +14,9 @@ const Nav = () => {
             <Navegation>
                 <Link href="/">Inicio</Link>
                 <Link href="/populares">Populares</Link>
+                <Link href="/arreglos">Arreglos</Link>
+                <Link href="/descuentos">Promoción</Link>
+                <Link href="/descuentos">Arma tu pedido</Link>
                 { email === 'saul.franco1420@gmail.com' || email === 'vickyziga@gmail.com' ? 
                      <Link href="/newProduct">Nuevo producto</Link>
                     : null
