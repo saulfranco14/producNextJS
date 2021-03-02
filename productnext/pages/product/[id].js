@@ -146,6 +146,8 @@ const ProductId = () => {
 
     const saveComentario = ( e ) => {
         e.preventDefault();
+        e.target.reset();
+
         if(!user) return router.push('/login');
 
         comentario.userId = user.uid;
