@@ -28,9 +28,10 @@ import { route } from 'next/dist/next-server/server/router';
 
 const ProductId = () => {
 
-    const [ product, setProduct ]   = useState({});
-    const [ error, setError ]       = useState(false);
-    const [ vote, setVote ]         = useState(0);
+    const [ product, setProduct ]           = useState({});
+    const [ error, setError ]               = useState(false);
+    const [ vote, setVote ]                 = useState(0);
+    const [ comentario, setComentario ]     = useState({});
 
     const router                = useRouter();
     const { query : { id } }    = router;
@@ -58,7 +59,7 @@ const ProductId = () => {
         getProduct();
 
       }
-    }, [id]);
+    }, [id, product]);
 
     const {
             comentarios, 
@@ -131,7 +132,40 @@ const ProductId = () => {
                 })
             }
         }
-       
+    }
+
+    // Comentarios
+
+    const comentariosChange = ( e ) =>{
+
+        setComentario({
+            ...comentario,
+            [e.target.name] : e.target.value
+        })
+    }
+
+    const saveComentario = ( e ) => {
+        e.preventDefault();
+        if(!user) return router.push('/login');
+
+        comentario.userId = user.uid;
+        comentario.userName = user.displayName;
+
+        // New comentario
+        const newComentario = [ ...comentarios, comentario];
+
+        // Update firebase
+        firebase.db.collection('productoArreglo').doc(id).update({
+            comentarios: newComentario
+        })
+
+        // Update state
+        setProduct({
+            ...product,
+            comentarios: newComentario
+        })
+
+
     }
    
     return ( 
@@ -158,11 +192,14 @@ const ProductId = () => {
                                 user && (
                                     <Fragment>
                                         <h2> Agrega comentario</h2>
-                                        <form>
+                                        <form
+                                            onSubmit={saveComentario}
+                                        >
                                             <DivForm>
                                                 <input
                                                     type="text"
                                                     name="message"
+                                                    onChange={comentariosChange}
                                                 />
                                             </DivForm>
                                             <InputSubmit
@@ -172,14 +209,16 @@ const ProductId = () => {
                                         </form>
 
                                         <h2>Comentarios</h2>
-                                        {
-                                            comentarios.map( comentario => (
-                                                <li>
-                                                    <p>{comentario.nombre}</p>
-                                                    <p>{comentario.userName}</p>
-                                                </li>
-                                            ))
-                                        }
+                                        <ul>
+                                            {
+                                                comentarios.map( comentario => (
+                                                    <li>
+                                                        <p>{comentario.message}</p>
+                                                        <p>Escrito por: {comentario.userName}</p>
+                                                    </li>
+                                                ))
+                                            }
+                                        </ul>
                                     </Fragment>
                                 )
                             }
