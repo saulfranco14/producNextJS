@@ -1,34 +1,14 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { Fragment } from 'react';
 import Layout from '../components/layout/Layout';
-import { FirebaseContext } from '../firebase';
 import DetailArreglo from '../components/layout/DetailArreglo'; 
-
-
+import useProducts from '../hooks/UseProducts.components';
 
 export default function Home() {
 
-  const [ arreglos, setArreglos ] = useState([]);
-  const { firebase }              = useContext(FirebaseContext);
-
-  useEffect(() => {
-    const getArreglos = () =>{
-      firebase.db.collection('productoArreglo').orderBy('created_at', 'desc').onSnapshot(getSnapshot)
-    }
-    getArreglos();
-  }, [])
-
-  function getSnapshot(snapshot){
-    const arreglos = snapshot.docs.map( doc => {
-      return{
-        id: doc.id,
-        ...doc.data()
-      }
-    })
-    setArreglos(arreglos);
-  }
+  const { arreglos } = useProducts('created_at');
 
   return (
-    <div>
+    <Fragment>
       <Layout>
         <div className="listado-productos">
           <div className="contenedor">
@@ -45,6 +25,6 @@ export default function Home() {
           </div>
         </div>
       </Layout>
-    </div>
+    </Fragment>
   )
 }

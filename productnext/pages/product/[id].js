@@ -166,8 +166,10 @@ const ProductId = () => {
             ...product,
             comentarios: newComentario
         })
+    }
 
-
+    const createComment = ( id ) => {
+        
     }
    
     return ( 
@@ -213,8 +215,10 @@ const ProductId = () => {
                                         <h2>Comentarios</h2>
                                         <ul>
                                             {
-                                                comentarios.map( comentario => (
-                                                    <li>
+                                                comentarios.map( ( comentario, i)  => (
+                                                    <li 
+                                                        key={`${comentario.userId}-${i}`}
+                                                    >
                                                         <p>{comentario.message}</p>
                                                         <p>Escrito por: {comentario.userName}</p>
                                                     </li>
